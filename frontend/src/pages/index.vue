@@ -1,7 +1,11 @@
+<script setup lang="ts">
+import Chat from "@/components/Chat.vue";
+import ChatInput from "@/components/ChatInput.vue";
+</script>
+
 <template>
   <main class="w-full h-screen flex flex-col items-center justify-center">
-    <section class="w-xl h-64 rounded-lg bg-purple-100">
-      
-    </section>
+    <Chat></Chat>
+    <ChatInput class="mt-10" />
   </main>
 </template>
