@@ -6,6 +6,6 @@ import ChatInput from "@/components/ChatInput.vue";
 <template>
   <main class="w-full h-screen flex flex-col items-center justify-center">
     <Chat></Chat>
-    <ChatInput class="mt-10" />
+    <ChatInput />
   </main>
 </template>
