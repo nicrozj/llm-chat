@@ -6,11 +6,15 @@ import VStack from "@/components/stacks/VStack.vue";
 </script>
 
 <template>
-  <main class="w-full max-h-screen flex">
-    <ChatList />
-    <VStack class="w-full items-center">
-      <Chat class="grow" />
-      <ChatInput class="justify-self-end" />
+  <main class="w-full h-full flex flex-row overflow-hidden">
+    <ChatList class="basis-1/7 shrink-0" />
+    <VStack class="basis-6/7 max-h-screen w-full overflow-hidden">
+      <Chat class="basis-6/7 w-full max-w-full overflow-hidden" />
+      <div
+        class="basis-1/7 w-full h-full flex flex-col items-center justify-center"
+      >
+        <ChatInput />
+      </div>
     </VStack>
   </main>
 </template>

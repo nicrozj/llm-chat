@@ -1,3 +1,5 @@
 <template>
-  <section class="h-screen border-r-[1px] border-border w-xs">&nbsp;</section>
+  <section class="h-screen overflow-hidden border-r-[1px] border-border">
+    &nbsp;
+  </section>
 </template>
