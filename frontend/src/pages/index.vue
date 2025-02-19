@@ -11,7 +11,7 @@ import VStack from "@/components/stacks/VStack.vue";
     <VStack class="basis-6/7 max-h-screen w-full overflow-hidden">
       <Chat class="basis-6/7 w-full max-w-full overflow-hidden" />
       <div
-        class="basis-1/7 w-full h-full flex flex-col items-center justify-center"
+        class="basis-1/7 w-full h-full flex flex-col items-center justify-center border-border border-t-[1px] py-2"
       >
         <ChatInput />
       </div>
