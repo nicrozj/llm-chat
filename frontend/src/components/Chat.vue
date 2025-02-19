@@ -7,7 +7,7 @@ import VStack from "./stacks/VStack.vue";
 <template>
   <section class="overflow-y-scroll">
     <div class="flex mx-20">
-      <VStack class="gap-4 w-full">
+      <VStack class="gap-4 w-full p-4">
         <RequestBubble>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
           deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
@@ -32,12 +32,7 @@ import VStack from "./stacks/VStack.vue";
           omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
           molestiae.
         </ResponseBubble>
-        <RequestBubble>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
-          deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
-          omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
-          molestiae.
-        </RequestBubble>
+        <RequestBubble>Lorem ipsum dolor sit amet</RequestBubble>
         <ResponseBubble>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
           deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
@@ -47,8 +42,7 @@ import VStack from "./stacks/VStack.vue";
         <RequestBubble>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
           deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
-          omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
-          molestiae.
+          omnis ab.
         </RequestBubble>
         <ResponseBubble>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
@@ -56,12 +50,7 @@ import VStack from "./stacks/VStack.vue";
           omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
           molestiae.
         </ResponseBubble>
-        <RequestBubble>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
-          deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
-          omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
-          molestiae.
-        </RequestBubble>
+        <RequestBubble> Lorem </RequestBubble>
       </VStack>
     </div>
   </section>

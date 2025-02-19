@@ -39,7 +39,7 @@ const resize = () => {
         <button
           class="size-8 flex justify-center items-center rounded-full bg-dark text-white"
         >
-          +
+          <span class="material-symbols-outlined">send</span>
         </button>
       </div>
     </div>
