@@ -15,7 +15,7 @@ const resize = () => {
 </script>
 
 <template>
-  <div class="rounded-3xl ring w-xl bg-secondly ring-border p-2 mb-10">
+  <div class="rounded-3xl ring w-xl bg-secondly ring-border p-2">
     <textarea
       @input="resize"
       ref="textarea"

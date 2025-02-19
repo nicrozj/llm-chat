@@ -5,39 +5,63 @@ import VStack from "./stacks/VStack.vue";
 </script>
 
 <template>
-  <section class="w-5xl overflow-y-scroll">
-    <div class="flex">
+  <section class="overflow-y-scroll">
+    <div class="flex mx-20">
       <VStack class="gap-4 w-full">
-        <RequestBubble class="self-end"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
+        <RequestBubble>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
           deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
           omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
-          molestiae.</RequestBubble
-        >
-        <ResponseBubble
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
+          molestiae.
+        </RequestBubble>
+        <ResponseBubble>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
           deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
           omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
-          molestiae.</ResponseBubble
-        >
-        <RequestBubble class="self-end"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
+          molestiae.
+        </ResponseBubble>
+        <RequestBubble>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
           deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
           omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
-          molestiae.</RequestBubble
-        >
-        <ResponseBubble
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
+          molestiae.
+        </RequestBubble>
+        <ResponseBubble>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
           deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
           omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
-          molestiae.</ResponseBubble
-        >
-        <RequestBubble class="self-end"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
+          molestiae.
+        </ResponseBubble>
+        <RequestBubble>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
           deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
           omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
-          molestiae.</RequestBubble
-        >
+          molestiae.
+        </RequestBubble>
+        <ResponseBubble>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
+          deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
+          omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
+          molestiae.
+        </ResponseBubble>
+        <RequestBubble>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
+          deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
+          omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
+          molestiae.
+        </RequestBubble>
+        <ResponseBubble>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
+          deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
+          omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
+          molestiae.
+        </ResponseBubble>
+        <RequestBubble>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa id
+          deleniti voluptas pariatur, quos esse, incidunt enim unde doloremque,
+          omnis ab. Nihil ab eligendi placeat, excepturi natus architecto totam
+          molestiae.
+        </RequestBubble>
       </VStack>
     </div>
   </section>
