@@ -1,8 +1,9 @@
 import { ref } from "vue";
 import { ChatAPI } from "@/services/apiService";
 
+const isLoading = ref(false);
+
 export function useChat() {
-  const isLoading = ref(false);
   const error = ref(null);
 
   const sendMessage = async (message: string) => {

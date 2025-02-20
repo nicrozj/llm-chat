@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { useChat } from "@/composables/useChat";
 import { useMessages } from "@/composables/useMessages";
 
-const { sendMessage } = useChat();
+const { sendMessage, isLoading } = useChat();
 const { messages } = useMessages();
 
 const textarea = ref<HTMLTextAreaElement | null>(null);
@@ -22,8 +22,11 @@ const resize = () => {
 
 const sendRequest = async () => {
   try {
+    isLoading.value = true;
     messages.push({ content: `${textareaContent.value}`, type: "request" });
     let response = await sendMessage(textareaContent.value);
+    isLoading.value = false;
+    textareaContent.value = "";
     messages.push({
       content: `${response.choices[0].message.content}`,
       type: "response",
