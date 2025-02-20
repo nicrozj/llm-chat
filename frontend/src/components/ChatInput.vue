@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useChat } from "@/composables/useChat";
+import { useMessages } from "@/composables/useMessages";
 
-let textarea = ref<HTMLTextAreaElement | null>(null);
+const { sendMessage } = useChat();
+const { messages } = useMessages();
+
+const textarea = ref<HTMLTextAreaElement | null>(null);
+
+const textareaContent = ref("");
 
 const resize = () => {
   if (!textarea.value) return;
@@ -12,6 +19,19 @@ const resize = () => {
     115
   )}px`;
 };
+
+const sendRequest = async () => {
+  try {
+    messages.push({ content: `${textareaContent.value}`, type: "request" });
+    let response = await sendMessage(textareaContent.value);
+    messages.push({
+      content: `${response.choices[0].message.content}`,
+      type: "response",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 </script>
 
 <template>
@@ -19,6 +39,7 @@ const resize = () => {
     <textarea
       @input="resize"
       ref="textarea"
+      v-model="textareaContent"
       class="p-2 focus:outline-0 resize-none w-full"
       placeholder="Сообщение"
     />
@@ -37,7 +58,8 @@ const resize = () => {
       </div>
       <div>
         <button
-          class="size-8 flex justify-center items-center rounded-full bg-dark text-white"
+          @click="sendRequest"
+          class="size-8 flex justify-center items-center rounded-full bg-dark text-white cursor-pointer"
         >
           <span class="material-symbols-outlined">send</span>
         </button>
