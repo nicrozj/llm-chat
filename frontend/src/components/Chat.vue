@@ -2,17 +2,22 @@
 import RequestBubble from "./RequestBubble.vue";
 import ResponseBubble from "./ResponseBubble.vue";
 import VStack from "./stacks/VStack.vue";
-import { useMessages } from "@/composables/useMessages";
 import LoadingSpinner from "./LoadingSpinner.vue";
 import HStack from "./stacks/HStack.vue";
+import { useMessages } from "@/composables/useMessages";
+import { useChats } from "@/composables/useChats";
 
 const { messages, isLoading } = useMessages();
+const { currentChat } = useChats();
 </script>
 <template>
   <section class="overflow-y-scroll">
     <div class="flex mx-20">
       <VStack class="gap-4 w-full p-4">
-        <VStack v-if="messages.length" v-for="(message, id) in messages">
+        <VStack
+          v-if="messages.length"
+          v-for="(message, id) in currentChat.messages"
+        >
           <RequestBubble v-if="message.type == 'request'">
             {{ message.content }}
           </RequestBubble>
