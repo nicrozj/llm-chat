@@ -3,12 +3,10 @@ import RequestBubble from "./RequestBubble.vue";
 import ResponseBubble from "./ResponseBubble.vue";
 import VStack from "./stacks/VStack.vue";
 import { useMessages } from "@/composables/useMessages";
-import { useChat } from "@/composables/useChat";
 import LoadingSpinner from "./LoadingSpinner.vue";
 import HStack from "./stacks/HStack.vue";
 
-const { messages } = useMessages();
-const { isLoading } = useChat();
+const { messages, isLoading } = useMessages();
 </script>
 <template>
   <section class="overflow-y-scroll">

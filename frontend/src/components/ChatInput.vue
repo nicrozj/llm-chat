@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useChat } from "@/composables/useChat";
 import { useMessages } from "@/composables/useMessages";
 
-const { sendMessage, isLoading } = useChat();
-const { messages } = useMessages();
+const { messages, sendMessage, isLoading } = useMessages();
 
 const textarea = ref<HTMLTextAreaElement | null>(null);
 
@@ -47,18 +45,7 @@ const sendRequest = async () => {
       placeholder="Сообщение"
     />
     <div class="flex gap-4 justify-between">
-      <div class="flex gap-4">
-        <button
-          class="size-8 flex justify-center items-center rounded-full bg-dark text-white"
-        >
-          +
-        </button>
-        <button
-          class="size-8 flex justify-center items-center rounded-full bg-dark text-white"
-        >
-          +
-        </button>
-      </div>
+      <div class="flex gap-4"></div>
       <div>
         <button
           @click="sendRequest"
