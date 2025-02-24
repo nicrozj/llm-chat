@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-secondly w-max max-w-1/3 rounded-xl p-4 self-end">
+  <div class="bg-secondly w-max max-w-3/5 rounded-xl px-8 py-2 self-end">
     <span><slot></slot></span>
   </div>
 </template>

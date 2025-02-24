@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useMessages } from "@/composables/useMessages";
+import { useChats } from "@/composables/useChats";
 
-const { messages, sendMessage, isLoading } = useMessages();
+const { sendMessage, isLoading } = useMessages();
+const { currentChat, addChat } = useChats();
 
 const textarea = ref<HTMLTextAreaElement | null>(null);
 
@@ -21,11 +23,16 @@ const resize = () => {
 const sendRequest = async () => {
   try {
     isLoading.value = true;
-    messages.push({ content: `${textareaContent.value}`, type: "request" });
+    if (!currentChat.value)
+      currentChat.value = addChat(`${textareaContent.value}`);
+    currentChat.value.messages.push({
+      content: `${textareaContent.value}`,
+      type: "request",
+    });
     let response = await sendMessage(textareaContent.value);
     isLoading.value = false;
     textareaContent.value = "";
-    messages.push({
+    currentChat.value.messages.push({
       content: `${response.choices[0].message.content}`,
       type: "response",
     });

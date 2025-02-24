@@ -6,7 +6,7 @@ import LoadingSpinner from "./LoadingSpinner.vue";
 import HStack from "./stacks/HStack.vue";
 import { useMessages } from "@/composables/useMessages";
 import { useChats } from "@/composables/useChats";
-
+import { marked } from "marked";
 const { messages, isLoading } = useMessages();
 const { currentChat } = useChats();
 </script>
@@ -15,18 +15,25 @@ const { currentChat } = useChats();
     <div class="flex mx-20">
       <VStack class="gap-4 w-full p-4">
         <VStack
-          v-if="messages.length"
-          v-for="(message, id) in currentChat.messages"
+          v-if="currentChat && currentChat.messages"
+          v-for="(message, index) in currentChat.messages"
+          :key="index"
         >
-          <RequestBubble v-if="message.type == 'request'">
-            {{ message.content }}
+          <RequestBubble
+            v-if="message.type == 'request'"
+            class="prose"
+            v-html="marked(message.content)"
+          >
           </RequestBubble>
-          <ResponseBubble v-if="message.type == 'response'">
-            {{ message.content }}
+          <ResponseBubble
+            v-else-if="message.type == 'response'"
+            class="prose"
+            v-html="marked(message.content)"
+          >
           </ResponseBubble>
           <HStack
             class="gap-4 items-center justify-start"
-            v-if="isLoading && messages.length - 1 == id"
+            v-if="isLoading && messages.length - 1 == index"
           >
             <LoadingSpinner class="h-max" />
             <span>Думаю...</span>

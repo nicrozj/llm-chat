@@ -1,35 +1,13 @@
-import { reactive, ref } from "vue";
-import { useMessages, type Message } from "./useMessages";
-
-const { messages } = useMessages();
+import { reactive, ref, type Ref } from "vue";
+import { type Message } from "./useMessages";
 
 export interface Chat {
   title: string;
   messages: Message[];
 }
 
-const chats: Chat[] = reactive([
-  {
-    title: "Test",
-    messages: [
-      { type: "response", content: "blabla" },
-      { type: "response", content: "blabla" },
-      { type: "response", content: "blabla" },
-      { type: "response", content: "blabla" },
-    ],
-  },
-  {
-    title: "Test2",
-    messages: [
-      { type: "response", content: "blabla" },
-      { type: "response", content: "blabla" },
-      { type: "response", content: "blabla" },
-      { type: "response", content: "blabla" },
-    ],
-  },
-]);
-
-const currentChat: Chat = chats[0] || useChats().addChat("Новый чат");
+const chats: Chat[] = reactive([]);
+const currentChat = ref<Chat>(chats[0]);
 
 export function useChats() {
   const addChat = (title: string) => {
@@ -37,12 +15,17 @@ export function useChats() {
       title: title,
       messages: [],
     });
-    return chats[chats.length];
+    return chats[chats.length - 1];
+  };
+
+  const getNewChat = () => {
+    return addChat("Новый чат");
   };
 
   return {
     chats,
     addChat,
     currentChat,
+    getNewChat,
   };
 }

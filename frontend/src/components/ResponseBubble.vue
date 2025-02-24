@@ -1,6 +1,5 @@
 <template>
-  <div class="bg-secondly w-max max-w-1/3 rounded-xl p-4">
+  <div class="bg-secondly w-max max-w-3/5 rounded-xl px-8 py-2">
     <span><slot></slot></span>
   </div>
-  <div></div>
 </template>
