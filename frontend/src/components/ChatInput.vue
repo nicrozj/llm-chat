@@ -29,13 +29,14 @@ const sendRequest = async () => {
       content: `${textareaContent.value}`,
       type: "request",
     });
-    let response = await sendMessage(textareaContent.value);
-    isLoading.value = false;
-    textareaContent.value = "";
-    currentChat.value.messages.push({
-      content: `${response.choices[0].message.content}`,
-      type: "response",
+    sendMessage(textareaContent.value).then((data) => {
+      currentChat.value.messages.push({
+        content: `${data.choices[0].message.content}`,
+        type: "response",
+      });
+      isLoading.value = false;
     });
+    textareaContent.value = "";
   } catch (err) {
     console.log(err);
   }

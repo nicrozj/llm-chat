@@ -33,7 +33,7 @@ const { currentChat } = useChats();
           </ResponseBubble>
           <HStack
             class="gap-4 items-center justify-start"
-            v-if="isLoading && messages.length - 1 == index"
+            v-if="isLoading && currentChat.messages.length - 1 == index"
           >
             <LoadingSpinner class="h-max" />
             <span>Думаю...</span>
