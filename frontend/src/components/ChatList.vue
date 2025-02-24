@@ -17,7 +17,10 @@ const { chats, currentChat, getNewChat } = useChats();
       <span class="truncate w-full">Новый чат</span>
     </button>
     <VStack class="mt-10 gap-1">
-      <ItemChatList v-for="chat in chats" @click="currentChat = chat">
+      <ItemChatList
+        v-for="chat in chats.slice().reverse()"
+        @click="currentChat = chat"
+      >
         {{ chat.title }}
       </ItemChatList>
     </VStack>

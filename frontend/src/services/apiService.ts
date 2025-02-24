@@ -11,7 +11,7 @@ export const ChatAPI = {
             content: `${message}`,
           },
         ],
-        model: "llama-3.3-70b-versatile",
+        model: "deepseek-r1-distill-llama-70b",
       },
       {
         headers: {

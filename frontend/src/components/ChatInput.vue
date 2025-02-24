@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useMessages } from "@/composables/useMessages";
-import { useChats } from "@/composables/useChats";
+import { useChats, chats } from "@/composables/useChats";
 
 const { sendMessage, isLoading } = useMessages();
 const { currentChat, addChat } = useChats();
@@ -36,6 +36,7 @@ const sendRequest = async () => {
         content: `${data.choices[0].message.content}`,
         type: "response",
       });
+      localStorage.setItem("chats", JSON.stringify(chats));
       isLoading.value = false;
     });
     textareaContent.value = "";

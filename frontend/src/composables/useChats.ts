@@ -7,7 +7,9 @@ export interface Chat {
 }
 
 const storedChats = localStorage.getItem("chats");
-const chats = <Chat[]>(storedChats ? JSON.parse(storedChats) : reactive([]));
+export const chats = storedChats
+  ? reactive(JSON.parse(storedChats))
+  : reactive([]);
 
 const currentChat = ref<Chat>(chats[0]);
 
@@ -23,6 +25,7 @@ export function useChats() {
   };
 
   const getNewChat = () => {
+    localStorage.setItem("chats", JSON.stringify(chats));
     return addChat("Новый чат");
   };
 
