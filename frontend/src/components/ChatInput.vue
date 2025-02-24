@@ -29,6 +29,8 @@ const sendRequest = async () => {
       content: `${textareaContent.value}`,
       type: "request",
     });
+    if (currentChat.value.messages.length == 1)
+      currentChat.value.title = `${textareaContent.value}`;
     sendMessage(textareaContent.value).then((data) => {
       currentChat.value.messages.push({
         content: `${data.choices[0].message.content}`,
