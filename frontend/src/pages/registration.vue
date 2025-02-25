@@ -39,7 +39,7 @@ function login() {
       <span class="text-2xl"> Вход </span>
       <div class="flex gap-2 flex-col">
         <span class="text-md text-zinc-600">Введите email</span>
-        <RegInput v-model="email" placeholder="email" />
+        <RegInput v-model="email" type="email" placeholder="email" />
       </div>
       <div class="flex gap-2 flex-col">
         <span class="text-md text-zinc-600">Введите пароль</span>
