@@ -29,10 +29,19 @@ export function useChats() {
     return addChat("Новый чат");
   };
 
+  const removeChat = (chat: Chat) => {
+    const index = chats.findIndex((item: Chat) => item === chat);
+    if (index !== -1) {
+      chats.splice(index, 1);
+    }
+    localStorage.setItem("chats", JSON.stringify(chats));
+  };
+
   return {
     chats,
     addChat,
     currentChat,
     getNewChat,
+    removeChat,
   };
 }

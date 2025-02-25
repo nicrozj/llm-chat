@@ -3,13 +3,11 @@ import ItemChatList from "./ItemChatList.vue";
 import VStack from "./stacks/VStack.vue";
 import { useChats } from "@/composables/useChats";
 
-const { chats, currentChat, getNewChat } = useChats();
+const { chats, currentChat, getNewChat, removeChat } = useChats();
 </script>
 
 <template>
-  <VStack
-    class="h-screen overflow-hidden border-r-[1px] border-border gap-1 p-4 min-w-3xs"
-  >
+  <VStack class="h-screen border-r-[1px] border-border gap-1 p-4 min-w-3xs">
     <button
       class="flex hover:bg-blue-500 bg-blue-400 text-white transition-colors rounded-lg duration-75 items-center cursor-pointer px-4 py-2"
       @click="currentChat = getNewChat()"
@@ -19,6 +17,7 @@ const { chats, currentChat, getNewChat } = useChats();
     <VStack class="mt-10 gap-1">
       <ItemChatList
         v-for="chat in chats.slice().reverse()"
+        :chat="chat"
         @click="currentChat = chat"
       >
         {{ chat.title }}

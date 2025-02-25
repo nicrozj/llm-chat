@@ -7,7 +7,7 @@ import VStack from "@/components/stacks/VStack.vue";
 
 <template>
   <main class="w-full h-full flex flex-row overflow-hidden">
-    <ChatList class="basis-1/7 shrink-0 resize-both" />
+    <ChatList class="basis-1/7 shrink-0" />
     <VStack class="basis-6/7 max-h-screen w-full overflow-hidden">
       <Chat class="basis-6/7 w-full max-w-full overflow-hidden" />
       <div
