@@ -1,17 +1,50 @@
 <script setup lang="ts">
+import { nextTick, onMounted, ref, watch } from "vue";
+
 import RequestBubble from "./RequestBubble.vue";
 import ResponseBubble from "./ResponseBubble.vue";
 import VStack from "./stacks/VStack.vue";
 import LoadingSpinner from "./LoadingSpinner.vue";
 import HStack from "./stacks/HStack.vue";
+
 import { useMessages } from "@/composables/useMessages";
 import { useChats } from "@/composables/useChats";
 import { marked } from "marked";
-const { messages, isLoading } = useMessages();
+
+const { isLoading } = useMessages();
 const { currentChat } = useChats();
+const chatContainer = ref<HTMLElement | null>(null);
+
+const scrollToBottom = async () => {
+  await nextTick();
+  if (chatContainer.value) {
+    chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+  }
+};
+
+watch(
+  () => currentChat.value?.messages,
+  () => {
+    scrollToBottom();
+  },
+  { deep: true }
+);
+
+watch(
+  () => isLoading.value,
+  (newVal, oldVal) => {
+    if (!newVal && oldVal) {
+      scrollToBottom();
+    }
+  }
+);
+
+onMounted(() => {
+  scrollToBottom();
+});
 </script>
 <template>
-  <section class="overflow-y-scroll">
+  <section ref="chatContainer" class="overflow-y-scroll h-full scroll-smooth">
     <div class="flex mx-20">
       <VStack class="gap-4 w-full p-4">
         <VStack
