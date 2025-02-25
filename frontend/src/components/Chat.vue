@@ -6,6 +6,7 @@ import ResponseBubble from "./ResponseBubble.vue";
 import VStack from "./stacks/VStack.vue";
 import LoadingSpinner from "./LoadingSpinner.vue";
 import HStack from "./stacks/HStack.vue";
+import RateResponse from "./RateResponse.vue";
 
 import { useMessages } from "@/composables/useMessages";
 import { useChats } from "@/composables/useChats";
@@ -58,11 +59,11 @@ onMounted(() => {
             v-html="marked(message.content)"
           >
           </RequestBubble>
-          <ResponseBubble
-            v-else-if="message.type == 'response'"
-            class="prose"
-            v-html="marked(message.content)"
-          >
+          <ResponseBubble v-else-if="message.type == 'response'" class="prose">
+            <template #response>
+              <div v-html="marked(message.content)"></div>
+              <RateResponse />
+            </template>
           </ResponseBubble>
           <HStack
             class="gap-4 items-center justify-start"
