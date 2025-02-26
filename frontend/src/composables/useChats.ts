@@ -16,28 +16,35 @@ export class Chat {
 }
 
 const storedChats = localStorage.getItem("chats");
-export const chats = reactive(storedChats ? JSON.parse(storedChats) : []);
-
+export const chats = reactive(
+  storedChats
+    ? JSON.parse(storedChats).map(
+        (chat: any) => new Chat(chat.title, chat.messages)
+      )
+    : []
+);
 if (chats.length === 0) {
   chats.push(new Chat("Новый чат"));
 }
 
-const currentChat = ref<Chat>(chats[0]);
+const currentChat = ref<Chat>(
+  chats[0] instanceof Chat
+    ? chats[0]
+    : new Chat(chats[0]?.title, chats[0]?.messages ?? [])
+);
 
 export function useChats() {
   const addChat = (title: string) => {
-    chats.push({
-      title: title,
-      messages: [],
-    });
-
+    const chat = new Chat(title);
+    chats.push(chat);
     localStorage.setItem("chats", JSON.stringify(chats));
-    return chats[chats.length - 1];
+    return chat;
   };
 
   const getNewChat = () => {
+    const chat = addChat("Новый чат");
     localStorage.setItem("chats", JSON.stringify(chats));
-    return addChat("Новый чат");
+    return chat;
   };
 
   const removeChat = (chat: Chat) => {
