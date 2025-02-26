@@ -7,7 +7,9 @@ const { chats, currentChat, getNewChat, removeChat } = useChats();
 </script>
 
 <template>
-  <VStack class="h-screen border-r-[1px] border-border gap-1 p-4 min-w-3xs">
+  <VStack
+    class="h-screen border-r-[1px] border-border gap-1 p-4 min-w-3xs overflow-y-scroll"
+  >
     <button
       class="flex hover:bg-blue-500 bg-blue-400 text-white transition-colors rounded-lg duration-75 items-center cursor-pointer px-4 py-2"
       @click="currentChat = getNewChat()"
