@@ -28,7 +28,6 @@ export const ChatAPI = {
     }
 
     const reader = response.body?.getReader();
-    console.log(reader);
     if (!reader) throw new Error("No response body");
 
     const decoder = new TextDecoder("utf-8");
