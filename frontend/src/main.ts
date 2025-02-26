@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import { createRouter, createWebHistory, RouterView } from "vue-router";
 import Index from "./pages/index.vue";
 import Registration from "./pages/registration.vue";
+import { ChatAPI } from "./services/apiService";
 
 import "./main.css";
 
