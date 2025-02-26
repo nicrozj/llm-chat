@@ -3,41 +3,10 @@ import { onMounted, ref } from "vue";
 import ItemChatList from "./ItemChatList.vue";
 import VStack from "./stacks/VStack.vue";
 import { useChats } from "@/composables/useChats";
+import { useModels } from "@/composables/useModels";
 
-const { chats, currentChat, getNewChat, removeChat } = useChats();
-
-const GROQ_API_KEY = (import.meta as any).env.VITE_API_KEY;
-
-interface Model {
-  id: string;
-  object: string;
-  created: number;
-  owned_by: string;
-  active: boolean;
-}
-
-const allModels = ref<Model[]>();
-
-async function getModels() {
-  try {
-    const response = await fetch("https://api.groq.com/openai/v1/models", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${GROQ_API_KEY}`,
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP Error! Status code: ${response.status}`);
-    }
-
-    const data = await response.json();
-    const allModels: Model[] = data.data;
-
-    return allModels;
-  } catch (error) {
-    console.error("Error fetching models: ", error);
-  }
-}
+const { chats, currentChat, getNewChat } = useChats();
+const { getModels, allModels, selectedModel } = useModels();
 
 onMounted(async () => {
   allModels.value = await getModels();
@@ -47,8 +16,10 @@ onMounted(async () => {
   <VStack
     class="h-screen border-r-[1px] border-border gap-2 p-4 min-w-3xs overflow-y-scroll"
   >
-    <select class="px-4 rounded-lg ring-2 ring-border py-2">
-      <option>Выберите модель</option>
+    <select
+      v-model="selectedModel"
+      class="px-4 rounded-lg ring-2 ring-border py-2"
+    >
       <option v-for="model in allModels">
         {{ model["id"] }}
       </option>
