@@ -1,10 +1,11 @@
 <script setup>
 import { ref, watch, nextTick, onMounted } from "vue";
 
-import { useMessages } from "@/composables/useMessages";
+import { useMessages, Message } from "@/composables/useMessages";
 import { useChats, chats } from "@/composables/useChats";
+import { ChatAPI } from "@/services/apiService";
 
-const { sendMessage, isLoading } = useMessages();
+const { isLoading } = useMessages();
 const { currentChat, addChat } = useChats();
 
 const inputValue = ref("");
@@ -15,28 +16,19 @@ const handleKeyDown = (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     sendRequest();
+    inputValue.value = "";
   }
 };
 
 const sendRequest = async () => {
   try {
     isLoading.value = true;
-    if (!currentChat.value) currentChat.value = addChat(`${inputValue.value}`);
-    currentChat.value.messages.push({
-      content: `${inputValue.value}`,
-      type: "request",
-    });
-    if (currentChat.value.messages.length == 1)
-      currentChat.value.title = `${inputValue.value}`;
-    sendMessage(inputValue.value).then((data) => {
-      currentChat.value.messages.push({
-        content: `${data.choices[0].message.content}`,
-        type: "response",
-      });
-      localStorage.setItem("chats", JSON.stringify(chats));
-      isLoading.value = false;
-    });
-    inputValue.value = "";
+    currentChat.value.addMessage("request", inputValue.value);
+    if (currentChat.value.messages.length == 1) {
+      currentChat.value.title = inputValue.value;
+    }
+    ChatAPI.streamGroqResponse(inputValue.value);
+    localStorage.setItem("chats", JSON.stringify(chats));
   } catch (err) {
     console.log(err);
   }
