@@ -1,9 +1,11 @@
 import { chats, useChats } from "@/composables/useChats";
 import { useMessages } from "@/composables/useMessages";
+import { useModels } from "@/composables/useModels";
 import { ref } from "vue";
 
 const { currentChat } = useChats();
 const { isLoading } = useMessages();
+const { selectedModel } = useModels();
 
 export const ChatAPI = {
   async streamGroqResponse(message: string) {
@@ -18,7 +20,7 @@ export const ChatAPI = {
       },
 
       body: JSON.stringify({
-        model: "llama3-70b-8192",
+        model: selectedModel.value,
         messages: [{ role: "user", content: `${message}` }],
         stream: true,
       }),
@@ -28,7 +30,6 @@ export const ChatAPI = {
     }
 
     const reader = response.body?.getReader();
-    console.log(reader);
     if (!reader) throw new Error("No response body");
 
     const decoder = new TextDecoder("utf-8");

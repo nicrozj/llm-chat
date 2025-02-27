@@ -2,8 +2,9 @@ import { reactive, ref, type Ref } from "vue";
 import { Message } from "./useMessages";
 
 export class Chat {
-  title!: string;
-  messages!: Message[];
+  title: string = "Новый чат";
+  messages: Message[] = [];
+  isEdited: boolean = false;
 
   constructor(title: string = "", messages: Message[] = []) {
     this.title = title;
@@ -12,6 +13,10 @@ export class Chat {
 
   addMessage(type: "response" | "request", message: string) {
     this.messages.push(new Message(type, message));
+  }
+
+  renameChat(title: string) {
+    this.title = title;
   }
 }
 
@@ -43,7 +48,6 @@ export function useChats() {
 
   const getNewChat = () => {
     const chat = addChat("Новый чат");
-    localStorage.setItem("chats", JSON.stringify(chats));
     return chat;
   };
 
