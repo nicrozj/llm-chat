@@ -18,13 +18,13 @@ export const ChatAPI = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${API_KEY}`,
       },
-
       body: JSON.stringify({
         model: selectedModel.value,
         messages: [{ role: "user", content: `${message}` }],
         stream: true,
       }),
     });
+
     if (!response.ok) {
       throw new Error(`Request error: ${response.status}`);
     }
@@ -34,26 +34,44 @@ export const ChatAPI = {
 
     const decoder = new TextDecoder("utf-8");
     let responseText = "";
+    let buffer = ""; // Буфер для неполных данных
 
     currentChat.value.addMessage("response", "");
     const responseMessage = currentChat.value.messages.slice(-1)[0];
 
     while (true) {
-      const data = await reader?.read();
-      if (data?.done) break;
+      const data = await reader.read();
+      if (data.done) {
+        if (buffer.trim()) {
+          try {
+            const parsedLine = buffer.replace(/^data: /, "");
+            if (parsedLine === "[DONE]") break;
 
-      const chunk = decoder.decode(data?.value);
+            const json = JSON.parse(parsedLine);
+            const content = json.choices[0]?.delta?.content || "";
+            if (content) {
+              responseText += content;
+              responseMessage.content = responseText;
+            }
+          } catch (error) {
+            console.error("Ошибка в последнем чанке:", error);
+          }
+        }
+        break;
+      }
 
-      const lines = chunk
-        .split("\n")
-        .filter((line) => line.trim() !== "")
-        .map((line) => line.replace(/^data: /, ""));
+      buffer += decoder.decode(data.value, { stream: true });
+
+      const lines = buffer.split("\n");
+      buffer = lines.pop() || "";
 
       for (const line of lines) {
-        if (line === "[DONE]") continue;
-
+        if (line.trim() === "") continue;
         try {
-          const json = JSON.parse(line);
+          const parsedLine = line.replace(/^data: /, "");
+          if (parsedLine === "[DONE]") continue;
+
+          const json = JSON.parse(parsedLine);
           const content = json.choices[0]?.delta?.content || "";
           if (content) {
             responseText += content;
@@ -64,6 +82,7 @@ export const ChatAPI = {
         }
       }
     }
+
     localStorage.setItem("chats", JSON.stringify(chats));
     isLoading.value = false;
     return responseText;

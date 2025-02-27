@@ -11,7 +11,9 @@ interface Model {
 const GROQ_API_KEY = (import.meta as any).env.VITE_API_KEY;
 
 const allModels = ref<Model[]>();
-const selectedModel = ref<string>();
+const selectedModel = ref<string | undefined>(
+  localStorage.getItem("selectedModel") || undefined
+);
 
 export const useModels = () => {
   async function getModels() {
@@ -29,7 +31,9 @@ export const useModels = () => {
       const data = await response.json();
       const allModels: Model[] = data.data;
 
-      selectedModel.value = allModels[0].id;
+      selectedModel.value = selectedModel.value
+        ? selectedModel.value
+        : (selectedModel.value = allModels[0].id);
 
       return allModels;
     } catch (error) {

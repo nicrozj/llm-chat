@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import ItemChatList from "./ItemChatList.vue";
 import VStack from "./stacks/VStack.vue";
 import { useChats } from "@/composables/useChats";
@@ -7,6 +7,11 @@ import { useModels } from "@/composables/useModels";
 
 const { chats, currentChat, getNewChat } = useChats();
 const { getModels, allModels, selectedModel } = useModels();
+
+watch(selectedModel, () => {
+  if (selectedModel.value)
+    localStorage.setItem("selectedModel", selectedModel.value);
+});
 
 onMounted(async () => {
   allModels.value = await getModels();

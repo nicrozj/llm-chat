@@ -17,9 +17,9 @@ const editTitle = async () => {
     await nextTick();
     editInputElement.value?.focus();
   } else {
-    chat.renameChat(editInput.value);
+    chat.renameChat(editInput.value.trim() ? editInput.value : "Новый чат");
     chat.isEdited = false;
-    localStorage.setItem("chats", JSON.stringify(chats));
+    localStorage.set("chats", JSON.stringify(chats));
   }
 };
 
@@ -48,7 +48,7 @@ const handleBlur = () => {
       @keydown="handleKeyDown"
       @blur="handleBlur"
       v-model="editInput"
-      class="w-full px-2 py-1 rounded-lg"
+      class="w-full px-2 py-1 rounded-lg bg-white"
     />
     <button
       @click="editTitle"
