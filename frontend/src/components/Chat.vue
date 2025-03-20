@@ -28,7 +28,7 @@ watch(
   () => {
     scrollToBottom();
   },
-  { deep: true }
+  { deep: true },
 );
 
 watch(
@@ -37,7 +37,7 @@ watch(
     if (!newVal && oldVal) {
       scrollToBottom();
     }
-  }
+  },
 );
 
 onMounted(() => {
@@ -72,9 +72,6 @@ onMounted(() => {
             <LoadingSpinner class="h-max" />
             <span>Думаю...</span>
           </HStack>
-        </VStack>
-        <VStack class="mt-80 text-xl items-center justify-center" v-else>
-          Начните переписку!
         </VStack>
       </VStack>
     </div>
