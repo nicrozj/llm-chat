@@ -1,7 +1,6 @@
 import { chats, useChats } from "@/composables/useChats";
 import { useMessages } from "@/composables/useMessages";
 import { useModels } from "@/composables/useModels";
-import { ref } from "vue";
 
 const { currentChat } = useChats();
 const { isLoading } = useMessages();
@@ -34,7 +33,7 @@ export const ChatAPI = {
 
     const decoder = new TextDecoder("utf-8");
     let responseText = "";
-    let buffer = ""; // Буфер для неполных данных
+    let buffer = "";
 
     currentChat.value.addMessage("response", "");
     const responseMessage = currentChat.value.messages.slice(-1)[0];
